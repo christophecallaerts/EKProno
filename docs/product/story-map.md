@@ -16,7 +16,7 @@ The **pool organiser** — the person who sets up the pool for a tournament, inv
 | --- | ------------------------------------------------------------------------------------------ |
 | 001 | As an organiser, I create a pool with a name and pick the tournament it follows              |
 | 002 | As an organiser, I load the tournament's match schedule, including group stage and knockouts |
-| 003 | As an organiser, I choose the scoring rules — points for an exact score, for the correct outcome, and any bonus points |
+| 003 | As an organiser, I choose the scoring rules — how many points a correct outcome is worth, with an extra point on top for an exact score |
 
 ### Get everyone in
 
