@@ -48,3 +48,77 @@ jobs:
           name: test-results
           path: TestResults/*.trx
           if-no-files-found: ignore
+
+  e2e:
+    name: End-to-end tests
+    runs-on: ubuntu-latest
+
+    # Playwright drives a real browser against a real `dotnet run`, so it is slower and
+    # kept in its own job rather than gating the unit tests behind it.
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: npm
+          cache-dependency-path: tests/e2e/package-lock.json
+
+      - name: Install test dependencies
+        working-directory: tests/e2e
+        run: npm ci
+
+      - name: Resolve Playwright version
+        id: playwright
+        working-directory: tests/e2e
+        run: echo "version=$(node -p "require('@playwright/test/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      # The browser download is ~130 MB, so key a cache on the exact Playwright version.
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+
+      - name: Install Chromium
+        working-directory: tests/e2e
+        run: npx playwright install --with-deps chromium
+
+      # Build once here; the Playwright config then starts the app with --no-build, so a
+      # slow restore cannot eat into the web server's start-up timeout.
+      - name: Build the app
+        run: dotnet build EKProno.csproj --configuration Release
+
+      - name: Run end-to-end tests
+        working-directory: tests/e2e
+        env:
+          E2E_CONFIGURATION: Release
+          E2E_NO_BUILD: 'true'
+        run: npx playwright test
+
+      - name: E2E report
+        if: always()
+        uses: dorny/test-reporter@v2
+        with:
+          name: End-to-end tests
+          path: tests/e2e/test-results/e2e-results.xml
+          reporter: java-junit
+          fail-on-error: false
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            tests/e2e/playwright-report
+            tests/e2e/test-results
+          retention-days: 7
+          if-no-files-found: ignore

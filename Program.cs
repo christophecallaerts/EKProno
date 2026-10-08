@@ -20,9 +20,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddAuthorization();
 
 // The "database": one JSON document behind IDataStore. Swapping in a real database means
-// replacing this single registration.
-builder.Services.AddSingleton<IDataStore>(_ => new JsonFileDataStore(
-    Path.Combine(builder.Environment.ContentRootPath, "App_Data", "ekprono.json")));
+// replacing this single registration. `DataStore:Path` overrides where that document
+// lives, which is how the end-to-end tests run against a throwaway file instead of the
+// developer's own data.
+var dataStorePath = builder.Configuration["DataStore:Path"]
+    ?? Path.Combine(builder.Environment.ContentRootPath, "App_Data", "ekprono.json");
+builder.Services.AddSingleton<IDataStore>(_ => new JsonFileDataStore(dataStorePath));
 
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<IJoinTokenGenerator, JoinTokenGenerator>();

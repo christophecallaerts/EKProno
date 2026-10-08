@@ -12,77 +12,77 @@ build_property.EntryPointFilePath =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = EKProno
 build_property.RootNamespace = EKProno
-build_property.ProjectDir = c:\Users\cursist-gtb7nrh2\EKProno\
+build_property.ProjectDir = C:\Users\cursist-gtb7nrh2\EKProno\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 10.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = c:\Users\cursist-gtb7nrh2\EKProno
+build_property.MSBuildProjectDirectory = C:\Users\cursist-gtb7nrh2\EKProno
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Account/SignIn.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Account/SignIn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxTaWduSW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Account/SignOut.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Account/SignOut.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxTaWduT3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Error.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Index.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Create.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/EditMatch.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/EditMatch.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcRWRpdE1hdGNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Index.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Rename.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Rename.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcUmVuYW1lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Schedule.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Schedule.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcU2NoZWR1bGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Teams.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Teams.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcVGVhbXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Privacy.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_TimeZonePartial.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_TimeZonePartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9UaW1lWm9uZVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/_ViewImports.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/_ViewStart.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[c:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_Layout.cshtml]
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-u6inil11ug

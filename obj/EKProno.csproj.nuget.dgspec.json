@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj": {}
+    "C:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj": {}
   },
   "projects": {
-    "c:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj": {
+    "C:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj",
+        "projectUniqueName": "C:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj",
         "projectName": "EKProno",
-        "projectPath": "c:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj",
+        "projectPath": "C:\\Users\\cursist-gtb7nrh2\\EKProno\\EKProno.csproj",
         "packagesPath": "C:\\Users\\cursist-gtb7nrh2\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\cursist-gtb7nrh2\\EKProno\\obj\\",
+        "outputPath": "C:\\Users\\cursist-gtb7nrh2\\EKProno\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

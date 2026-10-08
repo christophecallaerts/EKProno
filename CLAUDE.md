@@ -14,6 +14,14 @@ dotnet watch                    # hot reload during development
 `dotnet test` runs the suite; `dotnet test --filter FullyQualifiedName~MyTest` runs a single
 test. Only unit and integration tests — no performance tests.
 
+```bash
+cd tests/e2e && npm test     # Playwright end-to-end tests, in a real browser
+```
+
+The end-to-end suite starts the app itself on port 5299 against a throwaway JSON store, so
+it runs happily next to a `dotnet run` you already have open. See
+[tests/e2e/README.md](tests/e2e/README.md).
+
 ## Architecture
 
 ASP.NET Core **Razor Pages** app targeting **.NET 10**, with `Nullable` and `ImplicitUsings`
@@ -41,8 +49,14 @@ enabled. Two projects, tied together by `EKProno.slnx`: the web app (`EKProno.cs
   (.NET 9+ static asset pipeline, not the older `UseStaticFiles`). Bootstrap, jQuery, and
   jQuery-validation are vendored under `wwwroot/lib/` — no npm toolchain.
 
+- [tests/e2e/](tests/e2e/) — Playwright specs in plain JavaScript, outside the .slnx and
+  with their own npm toolchain. `Program.cs` reads `DataStore:Path` so they can run
+  against a throwaway store instead of `App_Data/`.
+
 Keep validation and domain rules in `Services/`, not in PageModels: the unit tests exercise
-them directly, and the integration tests go over HTTP through `EkPronoWebApplicationFactory`.
+them directly, the integration tests go over HTTP through `EkPronoWebApplicationFactory`,
+and the end-to-end tests drive the rendered pages. Assert in the cheapest suite that can
+see the behaviour — reach for `tests/e2e/` only when the browser is the point.
 
 ## Issues
 
