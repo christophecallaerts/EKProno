@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EKProno")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f02283cc137c242849f2c84496c33c226a683df")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec27d420036ecbf69812d277b6d467998c6b89ca")]
 [assembly: System.Reflection.AssemblyProductAttribute("EKProno")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EKProno")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

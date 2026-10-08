@@ -48,7 +48,12 @@ The project drives development from docs, in this order:
 2. **Feature specs** — `docs/specs/NNN-<slug>.md`, produced by the `spec` skill
    (`.claude/skills/spec/`), using `spec-template.md`. `NNN` must match the story number
    from the story map.
-3. **Architecture** — [docs/architecture/](docs/architecture/) holds the 12 **arc42**
+3. **Domain model** — `docs/domain-model.md` is the single location for the domain model.
+   Whenever a new spec introduces or changes entities, relationships, or domain vocabulary,
+   update that file (never a per-spec or alternative domain-model doc). It must **always**
+   contain a Mermaid diagram (`classDiagram` or `erDiagram`) of the model, kept in sync
+   with the prose.
+4. **Architecture** — [docs/architecture/](docs/architecture/) holds the 12 **arc42**
    sections (`00`–`12`). These are currently empty templates; fill the relevant section
    rather than inventing a new doc location. Specs should reference them.
 
