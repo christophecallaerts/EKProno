@@ -31,6 +31,14 @@ with `Nullable` and `ImplicitUsings` enabled. The code is still the default scaf
 Because the application code is essentially empty, treat the documentation workflow below
 as the source of truth for intended behavior.
 
+## Issues
+
+Whenever the user mentions an issue (creating, reading, commenting, closing, listing),
+use the **GitHub MCP server** tools (`mcp__github__*`) — not `gh` CLI, not web fetches.
+
+The repository is always `christophecallaerts/EKProno`, i.e. `owner: christophecallaerts`,
+`repo: EKProno`. Do not infer the repo from a different remote or from the folder name.
+
 ## Documentation workflow
 
 The project drives development from docs, in this order:
