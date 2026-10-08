@@ -40,8 +40,13 @@ public class ScheduleModel(ScheduleService schedule) : PageModel
     [TempData]
     public string? LastStage { get; set; }
 
+    /// <remarks>
+    /// A <see cref="DateTime"/> rather than a string on purpose: TempData's serialiser
+    /// reads any date-shaped string back as a <see cref="DateTime"/>, so a string property
+    /// here throws on the next GET.
+    /// </remarks>
     [TempData]
-    public string? LastKickoff { get; set; }
+    public DateTime? LastKickoff { get; set; }
 
     public IActionResult OnGet(Guid id)
     {
@@ -55,10 +60,7 @@ public class ScheduleModel(ScheduleService schedule) : PageModel
             Stage = stage;
         }
 
-        if (LastKickoff is { Length: > 0 } && DateTime.TryParse(LastKickoff, out var kickoff))
-        {
-            LocalKickoff = kickoff;
-        }
+        LocalKickoff ??= LastKickoff;
 
         return Page();
     }
@@ -91,7 +93,7 @@ public class ScheduleModel(ScheduleService schedule) : PageModel
         // Keep the stage, and the date without its time: the next fixture is usually the
         // same stage on the same day (NFR-004, SC-002).
         LastStage = Stage.ToString();
-        LastKickoff = LocalKickoff?.Date.ToString("s");
+        LastKickoff = LocalKickoff?.Date;
 
         return RedirectToPage(new { id });
     }
