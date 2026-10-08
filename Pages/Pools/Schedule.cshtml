@@ -1,16 +1,147 @@
 @page "{id:guid}"
+@using EKProno.Domain
 @model EKProno.Pages.Pools.ScheduleModel
 @{
     ViewData["Title"] = "Match schedule";
+    var teams = Model.Schedule.Teams;
+    var canAddMatch = teams.Count >= 2;
 }
 
-<h1>@Model.PoolName</h1>
-<p class="text-muted">@Model.TournamentName</p>
+<div class="d-flex justify-content-between align-items-center mb-1">
+    <h1 class="mb-0">Match schedule</h1>
+    <a class="btn btn-outline-secondary" asp-page="Teams" asp-route-id="@Model.Schedule.Context.PoolId">
+        Teams (@teams.Count)
+    </a>
+</div>
+<p class="text-muted">
+    @Model.Schedule.Context.TournamentName — @Model.Schedule.Context.PoolName
+    <span class="ms-2">All times in @Model.Schedule.TimeZone.Id.</span>
+</p>
 
-@* FR-015 lands here. Spec 002 fills this screen in. *@
-<div class="alert alert-info">
-    Entering the match schedule is not built yet — see
-    <code>docs/specs/002-enter-match-schedule.md</code>.
+@if (Model.Notice is { Length: > 0 })
+{
+    <div class="alert alert-success">@Model.Notice</div>
+}
+@if (Model.Warning is { Length: > 0 })
+{
+    @* FR-010 / EC-2 / EC-7: a past kickoff is allowed, but never silently. *@
+    <div class="alert alert-warning">@Model.Warning</div>
+}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="h5 card-title">Add a match</h2>
+
+        @if (!canAddMatch)
+        {
+            @* EC-1: no form at all until there are two teams to choose between. *@
+            <p class="mb-0">
+                Add at least two teams before entering fixtures —
+                <a asp-page="Teams" asp-route-id="@Model.Schedule.Context.PoolId">add teams</a>.
+            </p>
+        }
+        else
+        {
+            <form method="post" asp-page-handler="Add" class="row g-2 align-items-end">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="col-md-3">
+                    <label asp-for="HomeTeamId" class="form-label"></label>
+                    <select asp-for="HomeTeamId" class="form-select"
+                            asp-items="@(new SelectList(teams, "Id", "Name"))"></select>
+                    <span asp-validation-for="HomeTeamId" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="AwayTeamId" class="form-label"></label>
+                    <select asp-for="AwayTeamId" class="form-select"
+                            asp-items="@(new SelectList(teams, "Id", "Name"))"></select>
+                    <span asp-validation-for="AwayTeamId" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="LocalKickoff" class="form-label"></label>
+                    <input asp-for="LocalKickoff" type="datetime-local" class="form-control" />
+                    <span asp-validation-for="LocalKickoff" class="text-danger"></span>
+                </div>
+                <div class="col-md-2">
+                    <label asp-for="Stage" class="form-label">Stage</label>
+                    <select asp-for="Stage" class="form-select">
+                        @foreach (var stage in StageExtensions.All)
+                        {
+                            <option value="@stage" selected="@(stage == Model.Stage)">@stage.DisplayName()</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Stage" class="text-danger"></span>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary w-100">Add</button>
+                </div>
+            </form>
+        }
+    </div>
 </div>
 
-<a class="btn btn-outline-secondary" asp-page="Index">Back to my pools</a>
+@if (Model.Schedule.Matches.Count == 0)
+{
+    <div class="alert alert-info">
+        No fixtures yet. The schedule may stay partial — add knockout matches once their
+        teams are known.
+    </div>
+}
+else
+{
+    @* FR-017: kickoff order throughout, with a heading whenever the stage changes. *@
+    @foreach (var stage in StageExtensions.All)
+    {
+        var matches = Model.Schedule.Matches.Where(m => m.Stage == stage).ToList();
+        if (matches.Count == 0)
+        {
+            continue;
+        }
+
+        <h2 class="h5 mt-4">
+            @stage.DisplayName()
+            @* FR-018: the count is informational — no stage has a required size (EC-12). *@
+            <span class="badge text-bg-secondary">@matches.Count</span>
+        </h2>
+
+        <table class="table table-sm align-middle">
+            <tbody>
+            @foreach (var match in matches)
+            {
+                <tr>
+                    <td class="text-nowrap">@match.LocalKickoff.ToString("ddd d MMM yyyy HH:mm")</td>
+                    <td>@match.HomeTeamName <span class="text-muted">v</span> @match.AwayTeamName</td>
+                    <td class="text-end text-nowrap">
+                        @if (match.HasKickedOff)
+                        {
+                            @* FR-014: a started match is frozen, so editing is not offered.
+                               Deleting still is — that rule is FR-015's, not this one's. *@
+                            <span class="badge text-bg-light">Kicked off</span>
+                        }
+                        else
+                        {
+                            <a class="btn btn-outline-secondary btn-sm"
+                               asp-page="EditMatch"
+                               asp-route-id="@Model.Schedule.Context.PoolId"
+                               asp-route-matchId="@match.Id">Edit</a>
+                        }
+                        <form method="post" asp-page-handler="Delete" class="d-inline">
+                            <input type="hidden" name="matchId" value="@match.Id" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+}
+
+<div class="mt-4">
+    <a class="btn btn-link" asp-page="Index">Back to my pools</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_TimeZonePartial" />
+}

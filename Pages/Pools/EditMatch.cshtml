@@ -1,0 +1,54 @@
+@page "{id:guid}/{matchId:guid}"
+@using EKProno.Domain
+@model EKProno.Pages.Pools.EditMatchModel
+@{
+    ViewData["Title"] = "Edit match";
+}
+
+<h1>Edit match</h1>
+<p class="text-muted">@Model.Context.TournamentName — @Model.Context.PoolName</p>
+
+<form method="post" class="col-md-7">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="HomeTeamId" class="form-label"></label>
+        <select asp-for="HomeTeamId" class="form-select"
+                asp-items="@(new SelectList(Model.Teams, "Id", "Name"))"></select>
+        <span asp-validation-for="HomeTeamId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AwayTeamId" class="form-label"></label>
+        <select asp-for="AwayTeamId" class="form-select"
+                asp-items="@(new SelectList(Model.Teams, "Id", "Name"))"></select>
+        <span asp-validation-for="AwayTeamId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="LocalKickoff" class="form-label"></label>
+        <input asp-for="LocalKickoff" type="datetime-local" class="form-control" />
+        <span asp-validation-for="LocalKickoff" class="text-danger"></span>
+        @* EC-7: moving a kickoff backwards is allowed, and the service warns about it. *@
+        <div class="form-text">Read in your own time zone.</div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Stage" class="form-label">Stage</label>
+        <select asp-for="Stage" class="form-select">
+            @foreach (var stage in StageExtensions.All)
+            {
+                <option value="@stage" selected="@(stage == Model.Stage)">@stage.DisplayName()</option>
+            }
+        </select>
+        <span asp-validation-for="Stage" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a class="btn btn-link" asp-page="Schedule" asp-route-id="@Model.Context.PoolId">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_TimeZonePartial" />
+}

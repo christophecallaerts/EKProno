@@ -1,0 +1,70 @@
+@page "{id:guid}"
+@model EKProno.Pages.Pools.TeamsModel
+@{
+    ViewData["Title"] = "Teams";
+}
+
+<h1>Teams</h1>
+<p class="text-muted">@Model.Context.TournamentName — @Model.Context.PoolName</p>
+
+@if (Model.Notice is { Length: > 0 })
+{
+    <div class="alert alert-success">@Model.Notice</div>
+}
+
+<form method="post" asp-page-handler="Add" class="col-md-7 mb-4">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="input-group">
+        <input asp-for="Name" class="form-control" placeholder="België" autofocus />
+        <button type="submit" class="btn btn-primary">Add team</button>
+    </div>
+    <span asp-validation-for="Name" class="text-danger"></span>
+</form>
+
+@if (Model.Teams.Count == 0)
+{
+    @* EC-1: fixtures are built from teams, so this is where an empty tournament starts. *@
+    <div class="alert alert-info">
+        No teams yet. Add at least two before you can enter a match.
+    </div>
+}
+else
+{
+    <ul class="list-group col-md-9">
+        @foreach (var team in Model.Teams)
+        {
+            <li class="list-group-item">
+                <form method="post" class="d-flex align-items-center gap-2">
+                    <input type="hidden" name="teamId" value="@team.Id" />
+                    <input name="Name" value="@team.Name" class="form-control form-control-sm"
+                           aria-label="Name of @team.Name" />
+                    <button type="submit" asp-page-handler="Rename"
+                            class="btn btn-outline-secondary btn-sm text-nowrap">Rename</button>
+                    @if (team.MatchCount == 0)
+                    {
+                        <button type="submit" asp-page-handler="Remove"
+                                class="btn btn-outline-danger btn-sm text-nowrap">Remove</button>
+                    }
+                    else
+                    {
+                        @* FR-005: a team in use cannot go; the count says why. *@
+                        <span class="badge text-bg-light text-nowrap">
+                            @team.MatchCount match@(team.MatchCount == 1 ? "" : "es")
+                        </span>
+                    }
+                </form>
+            </li>
+        }
+    </ul>
+}
+
+<div class="mt-4">
+    <a class="btn btn-outline-secondary" asp-page="Schedule" asp-route-id="@Model.Context.PoolId">
+        Back to the schedule
+    </a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -43,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/EditMatch.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcRWRpdE1hdGNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -55,8 +59,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcU2NoZWR1bGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Pools/Teams.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUG9vbHNcVGVhbXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/cursist-gtb7nrh2/EKProno/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_TimeZonePartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9UaW1lWm9uZVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/cursist-gtb7nrh2/EKProno/Pages/Shared/_ValidationScriptsPartial.cshtml]

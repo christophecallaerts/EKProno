@@ -27,6 +27,7 @@ builder.Services.AddSingleton<IDataStore>(_ => new JsonFileDataStore(
 builder.Services.AddSingleton(TimeProvider.System);
 builder.Services.AddSingleton<IJoinTokenGenerator, JoinTokenGenerator>();
 builder.Services.AddScoped<PoolService>();
+builder.Services.AddScoped<ScheduleService>();
 builder.Services.AddScoped<UserAccountService>();
 
 var app = builder.Build();
