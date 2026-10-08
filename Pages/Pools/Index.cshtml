@@ -32,8 +32,12 @@ else
                     <div class="fw-semibold">@pool.Name</div>
                     <div class="text-muted small">@pool.TournamentName</div>
                 </div>
-                <a class="btn btn-outline-secondary btn-sm"
-                   asp-page="Rename" asp-route-id="@pool.Id">Rename</a>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-outline-secondary btn-sm"
+                       asp-page="Schedule" asp-route-id="@pool.Id">Schedule</a>
+                    <a class="btn btn-outline-secondary btn-sm"
+                       asp-page="Rename" asp-route-id="@pool.Id">Rename</a>
+                </div>
             </li>
         }
     </ul>

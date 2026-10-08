@@ -1,0 +1,17 @@
+@* Reports the browser's IANA time zone once, so kickoffs read in the viewer's own zone
+   (FR-009, FR-017). Reloading only when the cookie was missing keeps this to one extra
+   request per visitor. *@
+<script>
+    (function () {
+        var name = '@EKProno.Services.ViewerTimeZone.CookieName';
+        var zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (!zone) { return; }
+
+        var current = document.cookie.split('; ')
+            .find(function (c) { return c.indexOf(name + '=') === 0; });
+
+        document.cookie = name + '=' + encodeURIComponent(zone) + '; path=/; max-age=31536000; samesite=lax';
+
+        if (!current) { window.location.reload(); }
+    })();
+</script>

@@ -11,6 +11,8 @@ public sealed class EkPronoData
 {
     public List<UserAccount> UserAccounts { get; set; } = [];
     public List<Tournament> Tournaments { get; set; } = [];
+    public List<Team> Teams { get; set; } = [];
+    public List<Match> Matches { get; set; } = [];
     public List<Pool> Pools { get; set; } = [];
     public List<Player> Players { get; set; } = [];
     public List<ScoringRules> ScoringRules { get; set; } = [];
