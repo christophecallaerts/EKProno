@@ -4,8 +4,17 @@
     ViewData["Title"] = "Teams";
 }
 
-<h1>Teams</h1>
-<p class="text-muted">@Model.Context.TournamentName — @Model.Context.PoolName</p>
+<div class="schedule">
+    <div class="schedule__header d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>
+            <h1>Teams</h1>
+            <p class="schedule__meta">@Model.Context.TournamentName · @Model.Context.PoolName</p>
+        </div>
+        <a class="btn btn-light btn-sm" asp-page="Schedule" asp-route-id="@Model.Context.PoolId">
+            Schedule
+        </a>
+    </div>
+</div>
 
 @if (Model.Notice is { Length: > 0 })
 {
@@ -64,6 +73,10 @@ else
         Back to the schedule
     </a>
 </div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/schedule.css" asp-append-version="true" />
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
