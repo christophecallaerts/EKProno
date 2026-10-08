@@ -1,0 +1,16 @@
+@page "{id:guid}"
+@model EKProno.Pages.Pools.ScheduleModel
+@{
+    ViewData["Title"] = "Match schedule";
+}
+
+<h1>@Model.PoolName</h1>
+<p class="text-muted">@Model.TournamentName</p>
+
+@* FR-015 lands here. Spec 002 fills this screen in. *@
+<div class="alert alert-info">
+    Entering the match schedule is not built yet — see
+    <code>docs/specs/002-enter-match-schedule.md</code>.
+</div>
+
+<a class="btn btn-outline-secondary" asp-page="Index">Back to my pools</a>

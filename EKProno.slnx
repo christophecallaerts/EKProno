@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/EKProno.Tests/EKProno.Tests.csproj" />
+  </Folder>
+  <Project Path="EKProno.csproj" />
+</Solution>

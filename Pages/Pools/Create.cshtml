@@ -1,0 +1,66 @@
+@page
+@model EKProno.Pages.Pools.CreateModel
+@{
+    ViewData["Title"] = "Create a pool";
+}
+
+<h1>Create a pool</h1>
+
+<form method="post" class="col-md-7">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="PoolName" class="form-label"></label>
+        <input asp-for="PoolName" class="form-control" autofocus />
+        <span asp-validation-for="PoolName" class="text-danger"></span>
+    </div>
+
+    <fieldset class="mb-3">
+        <legend class="h6">Tournament</legend>
+
+        @if (Model.Tournaments.Count > 0)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="UseExistingTournament"
+                       value="true" id="useExisting" />
+                <label class="form-check-label" for="useExisting">One I already entered</label>
+            </div>
+            <div class="mb-3 ms-4">
+                <select asp-for="TournamentId" class="form-select"
+                        asp-items="@(new SelectList(Model.Tournaments, "Id", "FullName"))">
+                </select>
+                <span asp-validation-for="TournamentId" class="text-danger"></span>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="UseExistingTournament"
+                       value="false" id="useNew" />
+                <label class="form-check-label" for="useNew">A new one</label>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="UseExistingTournament" value="false" />
+        }
+
+        <div class="@(Model.Tournaments.Count > 0 ? "ms-4" : "")">
+            <div class="mb-3">
+                <label asp-for="TournamentName" class="form-label"></label>
+                <input asp-for="TournamentName" class="form-control" placeholder="Europees Kampioenschap" />
+                <span asp-validation-for="TournamentName" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="TournamentEdition" class="form-label"></label>
+                <input asp-for="TournamentEdition" class="form-control" placeholder="2028" />
+                <span asp-validation-for="TournamentEdition" class="text-danger"></span>
+            </div>
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Create pool</button>
+    <a class="btn btn-link" asp-page="Index">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

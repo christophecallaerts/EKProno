@@ -90,3 +90,6 @@ desktop.ini
 
 # Claude Code local settings
 .claude/settings.local.json
+
+# EKProno local JSON data store (see Storage/JsonFileDataStore.cs)
+App_Data/

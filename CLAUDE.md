@@ -11,25 +11,38 @@ dotnet build
 dotnet watch                    # hot reload during development
 ```
 
-There is no test project yet. When one is added, `dotnet test` runs the suite and
-`dotnet test --filter FullyQualifiedName~MyTest` runs a single test.
+`dotnet test` runs the suite; `dotnet test --filter FullyQualifiedName~MyTest` runs a single
+test. Only unit and integration tests — no performance tests.
 
 ## Architecture
 
-ASP.NET Core **Razor Pages** app targeting **.NET 10**, single project (`EKProno.csproj`),
-with `Nullable` and `ImplicitUsings` enabled. The code is still the default scaffold:
+ASP.NET Core **Razor Pages** app targeting **.NET 10**, with `Nullable` and `ImplicitUsings`
+enabled. Two projects, tied together by `EKProno.slnx`: the web app (`EKProno.csproj`) and
+[tests/EKProno.Tests/](tests/EKProno.Tests/).
 
-- [Program.cs](Program.cs) — minimal-hosting startup; the only registered service is
-  `AddRazorPages()`. Any DI registration, data access, or auth goes here.
+- [Program.cs](Program.cs) — minimal-hosting startup, and the only place persistence, auth
+  and services are registered.
+- [Domain/](Domain/) — the entities from [docs/domain-model.md](docs/domain-model.md) as
+  plain serialisable classes. No behaviour beyond their own invariants.
+- [Services/](Services/) — the spec rules. `PoolService` owns everything spec 001 asks of a
+  pool and returns `Result<T>` rather than throwing, so pages render field-level messages.
+  `UserAccountService` is a deliberate authentication stand-in (see ADR-002).
+- [Storage/](Storage/) — `IDataStore` is the persistence seam; `JsonFileDataStore` is the
+  one implementation, a single JSON document mirrored to `App_Data/ekprono.json` (gitignored).
+  `Mutate` commits a private copy only when the caller accepts the result, which is what
+  makes multi-entity writes atomic. Construct it with `filePath: null` for an in-memory store.
+  See [ADR-001](docs/architecture/09-architecture-decisions.md).
 - [Pages/](Pages/) — each page is a `.cshtml` + `.cshtml.cs` PageModel pair in namespace
   `EKProno.Pages`. `_ViewImports.cshtml` sets that namespace and the tag helpers;
-  `Pages/Shared/_Layout.cshtml` is the shared layout.
+  `Pages/Shared/_Layout.cshtml` is the shared layout. `/Pools` is authorised as a folder.
+  Bound string properties are declared nullable on purpose, to keep MVC's implicit
+  `[Required]` from pre-empting the service's own validation messages.
 - [wwwroot/](wwwroot/) — static assets, served via `MapStaticAssets()`/`WithStaticAssets()`
   (.NET 9+ static asset pipeline, not the older `UseStaticFiles`). Bootstrap, jQuery, and
   jQuery-validation are vendored under `wwwroot/lib/` — no npm toolchain.
 
-Because the application code is essentially empty, treat the documentation workflow below
-as the source of truth for intended behavior.
+Keep validation and domain rules in `Services/`, not in PageModels: the unit tests exercise
+them directly, and the integration tests go over HTTP through `EkPronoWebApplicationFactory`.
 
 ## Issues
 

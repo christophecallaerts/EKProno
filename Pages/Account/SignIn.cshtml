@@ -1,0 +1,34 @@
+@page
+@model EKProno.Pages.Account.SignInModel
+@{
+    ViewData["Title"] = "Sign in";
+}
+
+<h1>Sign in</h1>
+<p class="text-muted">
+    EKProno does not have real accounts yet — enter an email address and you are that
+    organiser for this browser session.
+</p>
+
+<form method="post" class="col-md-6">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" autocomplete="email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="DisplayName" class="form-label"></label>
+        <input asp-for="DisplayName" class="form-control" />
+        <div class="form-text">Shown to the other players in your pools.</div>
+        <span asp-validation-for="DisplayName" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
